@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Enhanced Art to Anki Deck Generator using genanki
+Mario Sumali
 
-This script creates actual Anki deck files (.apkg) with images embedded directly.
+Script to Convert Famous Artworks to Anki Flashcards
 """
 
 import os
@@ -14,9 +14,7 @@ from pathlib import Path
 def parse_filename(filename):
     """
     Parse filename to extract artist and artwork names.
-    Same logic as before but optimized for genanki.
     """
-    # Remove file extension
     name = os.path.splitext(filename)[0]
     
     # Remove the trailing --S pattern
@@ -145,7 +143,6 @@ def generate_anki_deck(art_folder, output_file):
     deck_id = random.randrange(1 << 30, 1 << 31)
     deck = genanki.Deck(deck_id, 'Art History Collection')
     
-    # Get all image files
     image_extensions = {'.jpg', '.jpeg', '.png', '.gif', '.bmp'}
     image_files = []
     media_files = []
@@ -210,12 +207,6 @@ def main():
         print(f"📊 Successfully created: {parsed_count} flashcards")
         print(f"❌ Failed to parse: {failed_count} images")
         print(f"📁 Deck saved as: {output_file}")
-        print(f"\n📖 How to import:")
-        print(f"1. Open Anki")
-        print(f"2. Go to File > Import")
-        print(f"3. Select: {output_file}")
-        print(f"4. Click Import")
-        print(f"\n🎨 The deck will be called 'Art History Collection'")
         
     except Exception as e:
         print(f"❌ Error generating deck: {e}")
